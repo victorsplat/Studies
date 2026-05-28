@@ -6,7 +6,8 @@ Lista completa de mockups, projetos e esquemas arquiteturais.
 
 | Projeto | Tipo | Status | Última atualização |
 |---------|------|--------|-------------------|
-<!-- Novos projetos devem ser adicionados aqui -->
+| [`MeliPortfolio`](./Projects/MeliPortfolio/) | Portfólio Full-stack | Quase completo | 24/05/2026 |
+| [`SuicidalDropStore`](./Projects/SuicidalDropStore/) | E-commerce API (Backend) | Em andamento (Pilar 1/4) | 26/05/2026 |
 
 ## Templates
 - [`ProjectTemplate/`](./Templates/ProjectTemplate/) — Template para novos projetos

@@ -1,0 +1,53 @@
+erDiagram
+    USER {
+        ObjectId _id
+        string email
+        string password
+        string name
+        string role
+        date createdAt
+    }
+
+    PRODUCT {
+        ObjectId _id
+        string name
+        string slug
+        string description
+        string category
+        float basePrice
+        array variants
+        date createdAt
+    }
+
+    VARIANT {
+        string sku
+        string size
+        string color
+        int stock
+        float price
+    }
+
+    ORDER {
+        ObjectId _id
+        ObjectId userId
+        array items
+        float total
+        string status
+        date createdAt
+    }
+
+    ORDER_ITEM {
+        string sku
+        string productName
+        int quantity
+        float unitPrice
+    }
+
+    COUPON {
+        ObjectId _id
+        string code
+        string type
+        float value
+        date expiresAt
+        int maxUses
+    }
