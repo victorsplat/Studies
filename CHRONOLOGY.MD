@@ -1,0 +1,74 @@
+# CHRONOLOGY — Cronograma do Repositório
+
+Diário de bordo do AGENTStudie. Registra marcos, decisões, ideias, tarefas pendentes e lembretes agendados.
+
+## Legenda
+
+### Tipos de Entrada
+| Tipo | Quando usar |
+|------|-------------|
+| `[MARCO]` | Marcos concluídos (repositório criado, projeto finalizado) |
+| `[DECISAO]` | Decisões arquiteturais ou de design |
+| `[IDEA]` | Ideia registrada para implementar depois |
+| `[TODO]` | Tarefa pendente sem data definida |
+| `[ESTUDO]` | Sessão de estudo realizada |
+| `[BOOKMARK]` | Link, artigo, vídeo salvo para revisitar |
+| `[DUVIDA]` | Pergunta em aberto |
+| `[AGENDADO]` | Algo marcado para fazer em data futura |
+
+### Campos Opcionais
+- `⌛ Sugerir em: <data ou condicao>` — Lembrete para o agente retomar o assunto
+- `🏷️ <tags>` — Facilita buscas no arquivo
+
+---
+
+## 2026
+
+### Maio
+
+#### 27
+
+- `21:57 — [MARCO] — Início do repositório AGENTStudie`
+  Estrutura inicial: AGENTS.MD, README.MD, .gitignore, pastas Tech/, History/, Mockups/ com templates.
+  Repositório remoto configurado: `github.com/victorsplat/Studies`
+  Link: Commit `81c4f23`
+  🏷️ estrutura inicial
+
+- `22:10 — [MARCO] — Catálogo de projetos existentes`
+  MeliPortfolio e SuicidalDropStore registrados em `Mockups/Projects/`.
+  Cada projeto com README, ARCHITECTURE, REQUIREMENTS e schemas (`.MMD`).
+  Link: Commit `8d3a040`
+  🏷️ catalog
+
+- `22:30 — [MARCO] — CHRONOLOGY.MD criado`
+  Arquivo de cronologia adicionado para rastrear atividades e lembretes.
+  🏷️ estrutura
+
+- `22:35 — [MARCO] — Mapa visual Mermaid + guia criados`
+  README.MD atualizado com diagramas de repositório, comparativo, stacks, mindmap e roadmap.
+  MERMAID-GUIDE.MD criado com tutorial dos 4 tipos de diagrama.
+  AGENTS.MD atualizado com regras de manutenção da cronologia e do mapa.
+  Link: Commit pendente
+  🏷️ documentacao mermaid
+
+- `22:40 — [IDEA] — Protótipo de novo projeto`
+  Victor mencionou um protótipo novo para criar, não detalhado ainda.
+  ⌛ Sugerir em: proxima sessao
+  🏷️ ideia prototipo
+
+---
+
+## Próximos Passos (Agenda Aberta)
+
+### ⏳ Pendentes
+- [ ] **Mapa visual**: Verificar se os diagramas Mermaid renderizam corretamente no GitHub
+- [ ] **Novo protótipo**: Detalhar e iniciar o projeto que Victor mencionou
+- [ ] **Estudos Tech/**: Aguardando primeiro tópico
+- [ ] **Estudos History/**: Aguardando primeiro livro/fato
+
+### 📌 Agendados
+- _Nada agendado ainda_
+
+### 💡 Ideias Futuras
+- Explorar template de diagrama C4 para projetos em `Mockups/`
+- Criar script de automação para atualizar `_index_.MD` a partir do conteúdo das pastas
