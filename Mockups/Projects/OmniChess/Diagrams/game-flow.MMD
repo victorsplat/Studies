@@ -1,0 +1,63 @@
+# Game Flow — Fluxo de Jogo
+
+```mermaid
+stateDiagram-v2
+    [*] --> MenuPrincipal
+    MenuPrincipal --> Matchmaking: Jogar
+    MenuPrincipal --> Loja: Comprar
+    MenuPrincipal --> Colecao: Gerenciar
+    MenuPrincipal --> Perfil: Ver
+
+    Matchmaking --> Procurando: Entrar na fila
+    Procurando --> PartidaEncontrada: Oponente encontrado
+    Procurando --> Cancelado: Cancelar
+    PartidaEncontrada --> JogoAtivo: Aceitar
+    PartidaEncontrada --> MenuPrincipal: Recusar
+
+    JogoAtivo --> Movimento: Jogada do usuário
+    Movimento --> JogoAtivo: Valida + broadcast
+    JogoAtivo --> Xeque: Rei ameaçado
+    Xeque --> JogoAtivo: Defender
+    JogoAtivo --> XequeMate: Perdeu
+    JogoAtivo --> Afogamento: Sem movimentos
+    JogoAtivo --> Desistencia: Desistir
+    JogoAtivo --> Empate: Aceitar empate
+
+    XequeMate --> Resultado
+    Afogamento --> Resultado
+    Desistencia --> Resultado
+    Empate --> Resultado
+
+    Resultado --> AtualizarElo: Partida ranqueada
+    AtualizarElo --> MenuPrincipal
+    Resultado --> MenuPrincipal: Partida casual
+
+    Loja --> Compra: Comprar universo
+    Compra --> AdicionarColecao
+    AdicionarColecao --> Loja
+
+    Colecao --> Equipar: Selecionar universo
+    Equipar --> JogoAtivo: Atualizar visual
+    Equipar --> Colecao
+```
+
+## Fluxo de Abertura de Gacha
+
+```mermaid
+stateDiagram-v2
+    [*] --> LojaGacha: Abrir loja
+    LojaGacha --> AnimacaoAbertura: Gastar moedas
+
+    AnimacaoAbertura --> Resultado: Revelar
+
+    Resultado --> LuckyValueCheck: Item obtido
+    LuckyValueCheck --> AdicionarColecao: Item normal
+    LuckyValueCheck --> ResetLuckyValue: Item lendário
+
+    ResetLuckyValue --> AdicionarColecao
+    AdicionarColecao --> LojaGacha: Continuar
+    AdicionarColecao --> MenuPrincipal: Sair
+
+    Resultado --> LuckyValueIncrement: Raro ou inferior
+    LuckyValueIncrement --> LojaGacha: LuckyValue = 100? → garantido lendário na próxima
+```

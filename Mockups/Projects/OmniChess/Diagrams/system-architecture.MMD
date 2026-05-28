@@ -1,0 +1,154 @@
+# System Architecture — OmniChess
+
+```mermaid
+graph TB
+    subgraph "🌐 Client Layer"
+        WEB["Next.js 16 Web App<br/>(React + Tailwind + Zustand)"]
+        MOB["React Native Mobile App<br/>(Expo + Zustand)"]
+    end
+
+    WEB --> CDN["CDN (Vercel Edge)"]
+    WEB --> API_GW
+    WEB --> WS_GW
+    MOB --> API_GW
+    MOB --> WS_GW
+
+    subgraph "🔒 API Gateway (Spring Boot)"
+        API_GW["REST Controllers"]
+        WS_GW["WebSocket STOMP<br/>(/ws/game/{id})"]
+        JWT_F["JWT Auth Filter<br/>(OncePerRequest)"]
+        RATE["Rate Limiter"]
+        API_GW --> JWT_F
+        WS_GW --> JWT_F
+    end
+
+    subgraph "⚙️ Service Layer"
+        direction TB
+        S_AUTH["Auth Service<br/>(Register/Login/Refresh)"]
+        S_USER["User Service<br/>(Profile/Stats)"]
+        S_GAME["Game Service<br/>(Chess Engine + Moves)"]
+        S_MM["Matchmaking Service<br/>(Queue + Elo)"]
+        S_COS["Cosmetic Service<br/>(Universes + Gacha)"]
+        S_LO["LiveOps Service<br/>(Daily/BP/Event)"]
+        S_PAY["Payment Service<br/>(Stripe/PIX)"]
+        S_AD["Ad Reward Service<br/>(Rental)"]
+    end
+
+    subgraph "🧠 Chess Engine"
+        ENGINE["ChessEngine.java<br/>- Regras FIDE<br/>- Validação de jogadas<br/>- Geração de PGN<br/>- Detecção de fim de jogo"]
+    end
+
+    subgraph "📦 Data Layer"
+        MDB[("MongoDB Atlas<br/>Games / Users / Cosmetics")]
+        REDIS[("Redis<br/>Matchmaking Queue / Cache")]
+        BLOB[("Vercel Blob / S3<br/>Universe Assets")]
+    end
+
+    subgraph "📡 Real-time"
+        CH["MongoDB Change Streams"]
+        WS_SESS["WebSocket Sessions<br/>(Game Rooms)"]
+        MDB --> CH
+        CH --> WS_SESS
+        WS_SESS --> WEB
+        WS_SESS --> MOB
+    end
+
+    subgraph "💳 External Services"
+        STRIPE["Stripe + PIX API"]
+        ADMOB["Google AdMob"]
+        SMTP["SMTP (Email)"]
+    end
+
+    JWT_F --> S_AUTH
+    JWT_F --> S_USER
+    JWT_F --> S_GAME
+    JWT_F --> S_MM
+    JWT_F --> S_COS
+    JWT_F --> S_LO
+    JWT_F --> S_PAY
+
+    S_GAME --> ENGINE
+    S_GAME --> MDB
+    S_GAME --> CH
+    S_MM --> REDIS
+    S_MM --> MDB
+    S_COS --> MDB
+    S_COS --> BLOB
+    S_LO --> MDB
+    S_PAY --> STRIPE
+    S_PAY --> MDB
+    S_AD --> ADMOB
+    S_USER --> MDB
+
+    subgraph "⏰ Scheduled Tasks (Cron)"
+        CRON["@Scheduled<br/>- Expire rentals<br/>- Clean events<br/>- Reset rankings"]
+        CRON --> MDB
+    end
+
+    subgraph "📱 CI/CD"
+        GH["GitHub Actions"]
+        GH -->|Deploy Web| VERCEL["Vercel"]
+        GH -->|Deploy API| RAILWAY["Railway"]
+        GH -->|Deploy Mobile| EAS["EAS Build (Expo)"]
+    end
+```
+
+## Diagrama de Sequência: Partida Completa
+
+```mermaid
+sequenceDiagram
+    participant P1 as Player 1
+    participant P2 as Player 2
+    participant FE as Next.js Frontend
+    participant API as Spring Boot API
+    participant WS as WebSocket
+    participant MM as Matchmaking
+    participant ENG as Chess Engine
+    participant DB as MongoDB
+    participant CH as Change Stream
+
+    Note over P1,CH: Matchmaking
+    P1->>API: POST /matchmaking/join
+    P2->>API: POST /matchmaking/join
+    MM->>MM: Match found (elo range)
+    MM->>DB: Insert game document
+    MM-->>P1: gameFound (via polling/WS)
+    MM-->>P2: gameFound (via polling/WS)
+    P1->>WS: connect /ws/game/{id}
+    P2->>WS: connect /ws/game/{id}
+    WS-->>P1: opponentJoined
+    WS-->>P2: opponentJoined
+
+    Note over P1,CH: Gameplay
+    P1->>WS: move(from: "e2", to: "e4")
+    WS->>ENG: validateMove(state, move)
+    ENG-->>WS: valid (true, newState)
+    WS->>DB: update game.moves[]
+    DB-->>CH: change event
+    CH-->>WS: broadcast to room
+    WS-->>P1: moveAccepted(newState, timer)
+    WS-->>P2: moveAccepted(newState, timer)
+
+    P2->>WS: move(from: "e7", to: "e5")
+    WS->>ENG: validateMove
+    ENG-->>WS: valid
+    WS->>DB: update
+    DB-->>CH: change event
+    CH-->>WS: broadcast
+    WS-->>P1: moveAccepted
+    WS-->>P2: moveAccepted
+
+    Note over P1,CH: Checkmate
+    P1->>WS: move(from: "d1", to: "h5")
+    WS->>ENG: validateMove
+    ENG-->>WS: checkmate
+    WS->>DB: game.status = "finished", winner = P1
+    DB-->>CH: change event
+    CH-->>WS: broadcast
+    WS-->>P1: gameOver(winner: P1, reason: checkmate)
+    WS-->>P2: gameOver(winner: P1, reason: checkmate)
+
+    Note over P1,CH: Rating Update
+    API->>API: calculateRatingChange(P1: 1200, P2: 1180)
+    API->>DB: update user ratings
+```

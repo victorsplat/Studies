@@ -1,0 +1,142 @@
+erDiagram
+    USER {
+        ObjectId _id
+        string email
+        string passwordHash
+        string username
+        string displayName
+        string avatarUrl
+        string bio
+        int rating
+        int peakRating
+        int gamesPlayed
+        int gamesWon
+        int gamesDraw
+        date createdAt
+        date lastLoginAt
+        string activeUniverseId
+        array ownedCosmetics
+        int omniCoins
+        int omniCrystals
+        int luckyValue
+        int dailyStreak
+        date lastDailyClaim
+        string battlePassId
+        int battlePassLevel
+        string role
+    }
+
+    GAME {
+        ObjectId _id
+        ObjectId whitePlayerId
+        ObjectId blackPlayerId
+        ObjectId winnerId
+        string status
+        string result
+        array moves
+        string pgn
+        string timeControl
+        int whiteTimeMs
+        int blackTimeMs
+        int whiteRatingBefore
+        int blackRatingBefore
+        int ratingChange
+        date createdAt
+        date finishedAt
+        boolean isRated
+        string universeId
+    }
+
+    MOVE {
+        string from
+        string to
+        string piece
+        string captured
+        string promotion
+        string san
+        int moveNumber
+        int elapsedMs
+        date timestamp
+    }
+
+    UNIVERSE {
+        ObjectId _id
+        string name
+        string description
+        string slug
+        string rarity
+        string previewUrl
+        array tags
+        float priceCoins
+        float priceCrystals
+        boolean purchasable
+        date createdAt
+        boolean isActive
+        string status
+    }
+
+    PLAYER_COSMETIC {
+        ObjectId _id
+        ObjectId userId
+        ObjectId universeId
+        date acquiredAt
+        string source
+        boolean isEquipped
+        date rentalExpiresAt
+        boolean isRental
+    }
+
+    BATTLE_PASS {
+        ObjectId _id
+        string seasonId
+        string name
+        int maxLevel
+        date startDate
+        date endDate
+        array freeRewards
+        array premiumRewards
+        float premiumPrice
+    }
+
+    DAILY_REWARD {
+        int day
+        string rewardType
+        int amount
+        string universeId
+    }
+
+    EVENT {
+        ObjectId _id
+        string name
+        string description
+        date startDate
+        date endDate
+        string currencyId
+        string bannerUrl
+        array missions
+        array shopItems
+    }
+
+    TRANSACTION {
+        ObjectId _id
+        ObjectId userId
+        string type
+        float amount
+        string currency
+        string description
+        string stripePaymentId
+        string pixCode
+        string status
+        string idempotencyKey
+        date createdAt
+    }
+
+    MATCHMAKING_QUEUE {
+        ObjectId _id
+        ObjectId userId
+        int rating
+        int ratingRange
+        string universePreference
+        date joinedAt
+        string status
+    }

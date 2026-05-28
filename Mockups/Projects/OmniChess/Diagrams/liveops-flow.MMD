@@ -1,0 +1,57 @@
+# Live-Ops Flow — Fluxo de Retenção
+
+```mermaid
+flowchart TB
+    subgraph "Daily Login"
+        A[Usuário loga] --> B{Já reivindicou hoje?}
+        B -->|Não| C[Sistema calcula streak]
+        C --> D{Streak quebrada?}
+        D -->|Sim| E[Resetar para dia 1]
+        D -->|Não| F[Incrementar streak]
+        E --> G[Entregar recompensa do dia]
+        F --> G
+        G --> H[Registrar timestamp]
+        H --> I[Notificar usuário]
+        B -->|Sim| J[Bloquear até próximo dia]
+    end
+
+    subgraph "Battle Pass"
+        K[Jogar partida] --> L{Partida concluída?}
+        L -->|Sim| M[Calcular XP ganho]
+        M --> N[Atualizar nível do BP]
+        N --> O{Novo nível desbloqueado?}
+        O -->|Sim| P{Free ou Premium?}
+        P -->|Free| Q[Liberar recompensa free]
+        P -->|Premium| R[Liberar recompensa premium]
+        Q --> S[Notificar]
+        R --> S
+    end
+
+    subgraph "Eventos Sazonais"
+        T[Evento ativo?] -->|Sim| U[Mostrar banner + missões]
+        U --> V[Jogador completa missão]
+        V --> W[Validar no servidor]
+        W --> X[Entregar moeda de evento]
+        X --> Y{Moeda expirou?}
+        Y -->|Sim| Z[Remover do inventário]
+        Y -->|Não| AA[Pode gastar na loja do evento]
+    end
+
+    subgraph "Pity System"
+        BB[Abrir gacha] --> CC{Item lendário?}
+        CC -->|Sim| DD[Reset LuckyValue para 0]
+        CC -->|Não| EE[LuckyValue += 10]
+        EE --> FF{LuckyValue >= 100?}
+        FF -->|Sim| GG[Próximo gacha = lendário garantido]
+        FF -->|Não| HH[Exibir barra de progresso]
+    end
+
+    subgraph "Cron Jobs (Spring @Scheduled)"
+        II[Executar a cada 5 min] --> JJ{Limpar aluguéis expirados?}
+        JJ -->|Sim| KK[Desabilitar universos alugados vencidos]
+        JJ -->|Não| LL{Verificar fim de evento?}
+        LL -->|Sim| MM[Finalizar evento + limpar moedas]
+        LL -->|Não| NN{Reset de ranking semanal?}
+        NN -->|Sim| OO[Distribuir recompensas + resetar]
+    end
+```

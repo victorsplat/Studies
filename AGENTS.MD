@@ -132,3 +132,4 @@ Use tags nos `_index_.MD` e nos READMEs para facilitar buscas:
 <!-- Lista atualizada automaticamente pelos agentes -->
 - [`MeliPortfolio`](./Mockups/Projects/MeliPortfolio/) — Portfólio full-stack Next.js 16
 - [`SuicidalDropStore`](./Mockups/Projects/SuicidalDropStore/) — E-commerce API Java 21 + Spring Boot
+- [`OmniChess`](./Mockups/Projects/OmniChess/) — Jogo de Xadrez Multiverso (especificação + roadmap)

@@ -52,9 +52,16 @@ Diário de bordo do AGENTStudie. Registra marcos, decisões, ideias, tarefas pen
   🏷️ documentacao mermaid
 
 - `22:40 — [IDEA] — Protótipo de novo projeto`
-  Victor mencionou um protótipo novo para criar, não detalhado ainda.
+  Victor mencionou um protótipo novo para criar.
   ⌛ Sugerir em: proxima sessao
   🏷️ ideia prototipo
+
+- `23:10 — [MARCO] — OmniChess: especificação completa`
+  Projeto OmniChess (Xadrez Multiverso) documentado em Mockups/Projects/OmniChess/.
+  Arquivos criados: README, ARCHITECTURE, REQUIREMENTS, ROADMAP, schemas (domain-model, mongodb-structure, api-endpoints), diagramas (system-architecture, game-flow, liveops-flow).
+  Stack adaptada: Next.js 16 + Spring Boot 3.5 + MongoDB (em vez do Firebase original).
+  Link: Commit pendente
+  🏷️ omnichess especificacao roadmap
 
 ---
 
@@ -62,7 +69,7 @@ Diário de bordo do AGENTStudie. Registra marcos, decisões, ideias, tarefas pen
 
 ### ⏳ Pendentes
 - [ ] **Mapa visual**: Verificar se os diagramas Mermaid renderizam corretamente no GitHub
-- [ ] **Novo protótipo**: Detalhar e iniciar o projeto que Victor mencionou
+- [ ] **OmniChess**: Revisar especificação com Victor e decidir próximos passos
 - [ ] **Estudos Tech/**: Aguardando primeiro tópico
 - [ ] **Estudos History/**: Aguardando primeiro livro/fato
 
