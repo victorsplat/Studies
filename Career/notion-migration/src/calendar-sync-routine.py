@@ -71,17 +71,17 @@ def get_color(block_type):
 def create_events(service, routine):
     calendar_id = 'primary'
 
-    # First, delete existing routine events (tagged with ROTINA_SYNC)
+    # First, delete existing routine events (tagged with [ROTINA] in description)
     print("Limpando eventos de rotina antigos...")
     existing = service.events().list(
         calendarId=calendar_id,
         q='[ROTINA]',
-        singleEvents=True,
         maxResults=500
     ).execute()
     deleted = 0
     for event in existing.get('items', []):
-        if '[ROTINA]' in event.get('summary', ''):
+        desc = event.get('description', '')
+        if '[ROTINA]' in desc:
             service.events().delete(calendarId=calendar_id, eventId=event['id']).execute()
             deleted += 1
     print(f"  {deleted} eventos antigos removidos")
@@ -109,13 +109,15 @@ def create_events(service, routine):
             if end_dt <= start_dt:
                 end_dt += timedelta(days=1)
 
-            desc_lines = [f"{tag} {meta}".strip()] if (tag or meta) else []
+            desc_lines = ["[ROTINA]"]
+            if tag or meta:
+                desc_lines.append(f"{tag} {meta}".strip())
             if tag and '🟢' in tag:
                 desc_lines.append("🎧 Aproveite pra escutar podcast / estudar passivo")
-            description = '\n'.join(desc_lines) if desc_lines else label
+            description = '\n'.join(desc_lines)
 
             prefix = f"{icon} " if icon else ""
-            summary = f"[ROTINA] {prefix}{name}"
+            summary = f"{prefix}{name}"
 
             event = {
                 'summary': summary,
