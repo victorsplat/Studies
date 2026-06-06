@@ -39,5 +39,8 @@ build/
 *.psd
 *.ai
 
+# Agent Instructions (Local Only - DO NOT COMMIT)
+AGENTS.md
+
 # Excalidraw auto-save
 *~.excalidraw
