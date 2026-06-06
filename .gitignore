@@ -39,6 +39,11 @@ build/
 *.psd
 *.ai
 
+# Notion migration secrets
+Career/notion-migration/client-secret-gcal.json
+Career/notion-migration/gcal-token.json
+Career/notion-migration/*.json
+
 # Agent Instructions (Local Only - DO NOT COMMIT)
 AGENTS.md
 
