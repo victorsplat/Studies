@@ -167,7 +167,7 @@ META: Setembro (aplicações) → Outubro (oferta)
 
 ## Notas
 
-- **Nova rotina**: Ter-Sáb (café 7h30-16h30, estudo 17h-22h) + Dom/Seg (estudo 9h-18h) = ~39h/semana
+- **Nova rotina**: Ter-Sáb (café 7h30-16h30, estudo 17h-22h) + Dom (estudo 9h-18h) + Seg (estudo 7h30-18h) = ~39h/semana
 - **Sem monitor**: Foco total em SoloLearn + LeetCode Warm-ups + teoria (Testing Library, TDD, SQL)
 - **Celular**: SoloLearn app + LeetCode app + ChatGPT/Gemini pra explicar conceitos
 - **Monitor chega**: Código intensivo, cada semana do roadmap = 3-4 dias de execução
