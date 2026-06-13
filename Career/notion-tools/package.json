@@ -1,0 +1,12 @@
+{
+  "name": "notion-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Notion study tools — Cheat Sheet + Progress Tracker",
+  "scripts": {
+    "setup": "node setup-study-tools.js"
+  },
+  "dependencies": {
+    "@notionhq/client": "^5.22.0"
+  }
+}
