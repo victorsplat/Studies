@@ -2,8 +2,10 @@
 
 > Roadmap semanal por metas objetivas — sem horários fixos.
 > Cada semana tem UM entregável concreto. O resto é bônus.
-> Rotina real: passivo nos deslocamentos (3h/dia) + ativo 20h-22h (1-2h) + fim de semana (4-6h/dia).
-> Hoje: **6 de Junho de 2026**.
+> Nova rotina: Ter-Sáb (cafeteria 7h30-16h30) + Dom/Seg (estudo intensivo).
+> Estudo ativo: ~39h/semana.
+> Hoje: **13 de Junho de 2026**.
+> Status: Monitor quebrado (TV temporária), LeetCode/SoloLearn no celular.
 
 ---
 
@@ -14,193 +16,160 @@
 | 🟢 Mínimo | Faz diferença real no portfolio/gaps |
 | 🟡 Desejável | Acelera progresso |
 | 🔴 Stretch | Se sobrar tempo ou energia |
+| 📱 Fazível no celular | SoloLearn / LeetCode / teoria |
+| 💻 Precisa de PC | Código / testes / projetos |
 
 ---
 
-## Junho — MELI Tests + TDD + SQL
+## Fase 🟢 LÓGICA + ED (Sem Monitor — Celular)
 
-### S1 | 06-14 Jun | Setup + MELI Tests
+### L1 | Lógica Básica | 📱 SoloLearn
 
 | | Meta | Entregável |
 |---|------|------------|
-| 🟢 | Configurar Vitest + Testing Library no MELI | `vitest` rodando com 1 teste passando |
-| 🟢 | Testar 2 componentes principais | Gallery e ThemeToggle |
-| 🟡 | Cobertura >30% no front | Relatório de cobertura |
-| 🔴 | Testar i18n provider | Render com EN/ES/PT |
+| 🟢 | Variáveis, tipos, if/else, for, while | 10 exercícios no SoloLearn |
+| 🟡 | Funções, parâmetros, retorno | 5 exercícios |
+| 🔴 | Pequeno programa do zero (calculadora) | Código funcionando |
 
-**Passivo da semana**: Podcast "TDD com Vitest" / docs do Testing Library
+**Passivo**: Revisar conceitos de lógica no YouTube (Guanabara)
 
 ---
 
-### S2 | 15-21 Jun | MELI Tests — Profundidade
+### L2 | Arrays + Strings | 📱 SoloLearn + LeetCode
 
 | | Meta | Entregável |
 |---|------|------------|
-| 🟢 | Testar páginas e rotas | Home, About, Project, Contact |
-| 🟢 | Testar authStore e galleryStore | Zustand stores com testes |
-| 🟡 | Cobertura >50% | Relatório de cobertura |
-| 🔴 | Mock de fetch (API calls) | Testar loading/error/success states |
+| 🟢 | Percorrer array, acessar, modificar | 8 exercícios SoloLearn |
+| 🟢 | Manipulação de strings | 5 exercícios SoloLearn |
+| 🟡 | Maior elemento, soma, inverter array | 3 problemas |
+| 🔴 | LeetCode Warm-up: TwoSum (tentar, sem pressão) | 1 submissão |
 
-**Passivo da semana**: Revisar padrões de teste em React Testing Library
+**Passivo**: Entender complexidade O(n) vs O(n²)
 
 ---
 
-### S3 | 22-28 Jun | TDD + SQL
+### L3 | Maps + Hashmaps | 📱 SoloLearn + LeetCode
 
 | | Meta | Entregável |
 |---|------|------------|
-| 🟢 | TDD ciclo red-green-refactor (skill tdd-dev nível 1-2) | 3 testes TDD no SuicidalDrop |
-| 🟢 | SQL: modelagem relacional, DDL, DML, JOINs | Script SQL de schema relacional |
-| 🟡 | Mockito em testes do SuicidalDrop | Mock de dependências em 2 testes |
-| 🔴 | Subqueries, CTEs, window functions | Query SQL avançada funcional |
+| 🟢 | HashMap: chave-valor, put, get, contains | 5 exercícios |
+| 🟡 | HashSet: quando usar | 3 exercícios |
+| 🔴 | TwoSum com HashMap (solução otimizada) | 1 LeetCode Easy |
 
-**Passivo da semana**: Curso de SQL (Alura, Udemy) nos deslocamentos
+**Passivo**: Estudar HashMap internamente (collisions, load factor)
 
 ---
 
-### S4 | 29 Jun-05 Jul | Spring Data JPA + PostgreSQL
+### L4 | Revisão + LeetCode Intro | 📱 LeetCode
 
 | | Meta | Entregável |
 |---|------|------------|
-| 🟢 | JPA + Hibernate + PostgreSQL funcional | Projeto Spring Boot com PostgreSQL rodando |
-| 🟢 | Migrar 1 entidade do Mongo pra JPA | Entidade JPA com repository e query |
-| 🟡 | Relationships @OneToMany, @ManyToOne | 2 entidades relacionadas |
-| 🔴 | Flyway ou Liquibase | Migration versionada |
+| 🟢 | TwoSum, Palindrome Number | 2 LeetCode Easy |
+| 🟡 | Valid Parentheses, Roman to Integer | 2 LeetCode Easy |
+| 🔴 | Analisar complexidade das soluções | Big O de cada uma |
 
-**Passivo da semana**: Comparativo MongoDB vs PostgreSQL — quando usar cada um
+**Passivo**: Revisar tudo que aprendeu até aqui
 
 ---
 
-## Julho — SuicidalDrop Catalog + RestauranteAPI
+## Fase 🔴 CÓDIGO (Quando Monitor Chegar)
 
-### S5 | 06-12 Jul | SuicidalDrop Catalog com TDD
+### C1 | MELI Tests Intensivo | 💻 Meli-Portfolio
 
 | | Meta | Entregável |
 |---|------|------------|
-| 🟢 | Testar ProductController com TDD | GET, POST, PUT, DELETE com testes |
+| 🟢 | Configurar Vitest + Testing Library | `vitest` rodando com 1 teste |
+| 🟢 | Testar Gallery + ThemeToggle | 2 componentes testados |
+| 🟡 | Testar páginas (Home, About, Gallery) | Renderização + interação |
+| 🔴 | Cobertura >40% no front | Relatório de cobertura |
+
+---
+
+### C2 | SuicidalDrop Controller + TDD | 💻 SuicidalDropAPI
+
+| | Meta | Entregável |
+|---|------|------------|
+| 🟢 | ProductController (GET, POST, PUT, DELETE) | CRUD funcionando |
 | 🟢 | Testar ProductService com Mockito | Regras de negócio testadas |
-| 🟡 | Testar ProductRepository (Testcontainers) | Query de busca testada |
-| 🔴 | Cobertura >70% no módulo Catalog | Relatório JaCoCo |
-
-**Passivo da semana**: Revisar testes do Catalog que já existem
+| 🟡 | Testar ProductRepository | Queries testadas |
 
 ---
 
-### S6 | 13-19 Jul | Setup RestauranteAPI
+### C3 | Inventory (Pilar 3) | 💻 SuicidalDropAPI
 
 | | Meta | Entregável |
 |---|------|------------|
-| 🟢 | Spring Boot + PostgreSQL + JPA | API rodando com health check |
-| 🟢 | Domain model: Cardápio, Mesas, Pedidos | Entidades JPA com relacionamentos |
-| 🟡 | Primeiros endpoints REST | 2 endpoints funcionais |
-| 🔴 | Docker Compose com PostgreSQL | Ambiente local reproduzível |
-
-**Passivo da semana**: Estudar domínio de restaurante (cardápio, comanda, fechamento de mesa)
+| 🟢 | findAndModify + reserva atômica | Estoque funcionando |
+| 🟢 | Teste de concorrência (100+ threads) | Teste com CyclicBarrier |
+| 🟡 | Prevenção de oversell | Teste de borda |
 
 ---
 
-### S7 | 20-26 Jul | RestauranteAPI — TDD Intensivo
+### C4 | JPA + PostgreSQL + Setup Restaurante | 💻 RestauranteAPI
+
+| | Meta | Entregável |
+|---|------|------------|
+| 🟢 | Spring Boot + PostgreSQL + JPA rodando | Health check ok |
+| 🟢 | Entidades: Cardápio, Mesas, Pedidos | Modelo relacional |
+| 🟡 | Docker Compose com PostgreSQL | Ambiente reproduzível |
+
+---
+
+### C5 | RestauranteAPI — TDD Completo | 💻 RestauranteAPI
 
 | | Meta | Entregável |
 |---|------|------------|
 | 🟢 | TDD em todos os endpoints | Controller → Service → Repository |
-| 🟢 | 5+ testes passando | Testes unitários + integração |
-| 🟡 | Tratamento de erros global | @RestControllerAdvice com testes |
-| 🔴 | Testcontainers com PostgreSQL real | Teste de integração completo |
-
-**Passivo da semana**: Padrões de TDD em Spring Boot (blogs, YouTube)
+| 🟢 | @RestControllerAdvice com testes | Erros tratados globalmente |
+| 🔴 | Testcontainers com PostgreSQL real | Teste de integração |
 
 ---
 
-### S8 | 27 Jul-02 Ago | RestauranteAPI Completo
-
-| | Meta | Entregável |
-|---|------|------------|
-| 🟢 | Security (JWT) no RestauranteAPI | Login + rotas protegidas |
-| 🟢 | OpenAPI / Swagger | Documentação automática |
-| 🟡 | 100% dos endpoints testados | Cobertura >80% |
-| 🔴 | Deploy (Railway ou render) | API no ar |
-
-**Passivo da semana**: Preparar pitch do RestauranteAPI (domínio que você conhece)
-
----
-
-## Agosto — Estruturas + Job Prep
-
-### S9 | 03-09 Ago | Estruturas de Dados I
-
-| | Meta | Entregável |
-|---|------|------------|
-| 🟢 | Arrays, Lists, Stacks, Queues em Java | 5 exercícios resolvidos |
-| 🟢 | Maps, Sets | 3 exercícios |
-| 🟡 | Complexidade Big O | Resumo próprio |
-| 🔴 | HashMap vs TreeMap, HashSet vs TreeSet | Comparação com exemplos |
-
-**Passivo da semana**: Playlist de ED no YouTube (deslocamentos)
-
----
-
-### S10 | 10-16 Ago | Algoritmos
-
-| | Meta | Entregável |
-|---|------|------------|
-| 🟢 | Ordenação (Bubble, Merge, Quick) + Busca binária | 5 exercícios |
-| 🟢 | Two pointers, Sliding Window | 3 exercícios |
-| 🟡 | Recursão | 2 exercícios |
-| 🔴 | 2 LeetCode Easy | Challenges resolvidos |
-
-**Passivo da semana**: Canais de algoritmo (NeetCode, Fábrica de Dev)
-
----
-
-### S11 | 17-23 Ago | LinkedIn + Currículo
+### C6 | LinkedIn + Currículo + Apps | 💻 Job Prep
 
 | | Meta | Entregável |
 |---|------|------------|
 | 🟢 | LinkedIn: foto, headline, sobre, projetos | Perfil completo |
-| 🟢 | Currículo PDF: experiência, projetos, skills | Currículo pronto |
-| 🟡 | Badges + recomendações | 3 recomendações de colegas |
-| 🔴 | Portfólio no MELI atualizado | Seção "projetos" no ar |
-
-**Passivo da semana**: Ver perfis de Java Jr aprovados no LinkedIn (inspiração)
+| 🟢 | Currículo PDF | Versão final |
+| 🟡 | 10 aplicações enviadas | Confitec, SysMap, etc |
 
 ---
 
-### S12 | 24-30 Ago | Portfólio + Primeiras Aplicações
+## Timeline Resumida
 
-| | Meta | Entregável |
-|---|------|------------|
-| 🟢 | Organizar READMEs dos 3 projetos | README limpo e profissional |
-| 🟢 | **10 aplicações enviadas** | Confitec, PariPassu, SysMap + |
-| 🟡 | GitHub com pinned repositories | 3 repositórios destacados |
-| 🔴 | Carta de apresentação template | Template reutilizável |
+```
+SEM MONITOR (agora):
+  L1 ── Lógica básica ───────── SoloLearn
+  L2 ── Arrays + Strings ────── SoloLearn + LeetCode
+  L3 ── Maps + Hashmaps ─────── SoloLearn + LeetCode
+  L4 ── LeetCode Intro ──────── LeetCode Easy
 
----
+MONITOR CHEGA:
+  C1 ── MELI Tests ──────────── 1 semana
+  C2 ── Suicidal Controller ─── 1 semana
+  C3 ── Inventory (Pilar 3) ─── 1 semana
+  C4 ── JPA + Restaurante Setup  1 semana
+  C5 ── Restaurante TDD ──────── 1 semana
+  C6 ── LinkedIn + Apps ──────── 1 semana
 
-## Setembro+ — Ciclo de Aplicação
-
-| Semana | Meta | Estratégia |
-|--------|------|------------|
-| S13+ | Aplicar → errar → gap study → aplicar | Cada erro de entrevista vira estudo na semana seguinte |
-| Meta total | 30+ aplicações acumuladas | 3+ entrevistas, oferta até Outubro |
-
----
+META: Setembro (aplicações) → Outubro (oferta)
+```
 
 ## Metas Macro
 
-| Mês | Técnico | Job |
-|-----|---------|-----|
-| **Junho** | MELI com testes + TDD ★★→★★★ + SQL ★★→★★★ | Nada |
-| **Julho** | RestauranteAPI pronta 100% TDD + JPA ★★→★★★ | LinkedIn pronto |
-| **Agosto** | ED ★★→★★★ | 10+ aplicações |
-| **Setembro** | Fechar gaps de entrevista | 30+ apps, 3+ entrevistas |
-| **Outubro** | Estabilizar | **Oferta** |
-
----
+| Período | Técnico | Job |
+|---------|---------|-----|
+| **Sem monitor** | Lógica + ED ★→★★ via SoloLearn/LeetCode | — |
+| **Mês 1 pós-monitor** | MELI Tests + Suicidal TDD + JPA | LinkedIn pronto |
+| **Mês 2 pós-monitor** | RestauranteAPI completa | 10+ aplicações |
+| **Setembro+** | Fechar gaps de entrevista | 30+ apps, 3+ entrevistas |
+| **Outubro** | Estabilizar | Oferta |
 
 ## Notas
 
-- **Passivo é aliado, não substituto**: use deslocamentos + cozinhar para consumir conteúdo, mas o avanço real vem do **ativo** (1-2h/dia + fins de semana)
-- **Fim de semana é onde o progresso acelera**: 4-6h/dia sábado e domingo = 8-12h que fazem a semana valer
-- **Se atrasar, não acumula**: se S1 não fechar, o entregável vira prioridade do passivo e segue pra S2
-- **Oferta até Outubro**: é agressivo mas factível com consistência
+- **Nova rotina**: Ter-Sáb (café 7h30-16h30, estudo 17h-22h) + Dom/Seg (estudo 9h-18h) = ~39h/semana
+- **Sem monitor**: Foco total em SoloLearn + LeetCode Warm-ups + teoria (Testing Library, TDD, SQL)
+- **Celular**: SoloLearn app + LeetCode app + ChatGPT/Gemini pra explicar conceitos
+- **Monitor chega**: Código intensivo, cada semana do roadmap = 3-4 dias de execução
+- **Se atrasar, não acumula**: se L1 não fechar, o entregável vira passivo e segue pra L2
+- **Oferta até Outubro**: agressivo mas factível com a nova rotina

@@ -72,7 +72,8 @@ async function seedBlocks(databaseId) {
     'TH': 'Quinta', 'FR': 'Sexta', 'SA': 'Sábado', 'SU': 'Domingo'
   }
 
-  for (const periodKey of ['weekdays', 'saturday', 'sunday']) {
+  for (const periodKey in routine) {
+    if (periodKey === 'name' || periodKey === 'description') continue
     const period = routine[periodKey]
     const days = period.days
 

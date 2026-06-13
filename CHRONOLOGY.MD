@@ -65,6 +65,28 @@ Diário de bordo do AGENTStudie. Registra marcos, decisões, ideias, tarefas pen
 
 ---
 
+### Junho
+
+#### 13
+
+- `12:30 — [MARCO] — Monitor quebrado + replanejamento completo`
+  Victor sem monitor (indeterminado). Replanejamento do roadmap:
+  - Shift right: S1-S12 deslizam até o monitor chegar
+  - Período sem monitor focado em SoloLearn + LeetCode Warm-ups + teoria
+  - Novo emprego: barista em cafeteria (Ter-Sáb 7h30-16h30), cidade (commute curto)
+  - Rotina nova: Ter-Sáb estudo 17h-22h, Dom+Seg estudo 09h-18h (~39h/semana)
+  🏷️ replanejamento monitor-quebrado
+
+- `12:38 — [MARCO] — PersonalPromptsForRemakeTheWorld criado`
+  Repositório GitHub criado com contexto completo pra IAs externas:
+  - `gemini-system-prompt.md` — perfil, projetos, roadmap, instruções
+  - `notebooklm/` — 4 guias de estudo (TDD, SQL, ED, Spring)
+  - Acessível do celular via GitHub
+  Link: `github.com/victorsplat/PersonalPromptsForRemakeTheWorld`
+  🏷️ contexto gemini notebooklm repositorio
+
+---
+
 ## Próximos Passos (Agenda Aberta)
 
 ### ⏳ Pendentes

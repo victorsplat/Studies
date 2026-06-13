@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Cria eventos recorrentes no Google Calendar a partir da routine-definition.json"""
 
-import json, os, sys, pickle
+import json, os, sys
 from datetime import datetime, timedelta
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -14,11 +14,29 @@ CLIENT_SECRET = os.path.join(DIR, 'client-secret-gcal.json')
 TOKEN_FILE = os.path.join(DIR, 'gcal-token.json')
 ROUTINE_FILE = os.path.join(DIR, 'routine-definition.json')
 
+TYPE_ICONS = {
+    '📚 Estudo': '📚',
+    '💼 Trabalho': '💼',
+    '🚌 Deslocamento': '🚌',
+    '🍽️ Refeição': '🍽️',
+    '🛌 Sono': '😴',
+    '🎸 Lazer': '🎸',
+}
+
+COLOR_BY_TYPE = {
+    '📚': '10',
+    '💼': '7',
+    '🚌': '8',
+    '🍽️': '6',
+    '😴': '9',
+    '🎸': '3',
+}
+
 def get_service():
     creds = None
     if os.path.exists(TOKEN_FILE):
-        with open(TOKEN_FILE, 'rb') as f:
-            creds = pickle.load(f) if TOKEN_FILE.endswith('.pickle') else Credentials.from_authorized_user_file(TOKEN_FILE, SCOPES)
+        with open(TOKEN_FILE, 'r') as f:
+            creds = Credentials.from_authorized_user_file(TOKEN_FILE, SCOPES)
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
@@ -33,23 +51,31 @@ def get_service():
             f.write(creds.to_json())
     return build('calendar', 'v3', credentials=creds)
 
-TYPE_ICONS = {
-    '📚 Estudo': '📚',
-    '💼 Trabalho': '💼',
-    '🚌 Deslocamento': '🚌',
-    '🍽️ Refeição': '🍽️',
-    '🛌 Sono': '😴',
-    '🎸 Lazer': '🎸',
-}
-
-COLOR_BY_TYPE = {
-    '📚': '10',      # green
-    '💼': '7',       # blue/teal
-    '🚌': '8',       # gray
-    '🍽️': '6',       # orange
-    '😴': '9',       # blue
-    '🎸': '3',       # purple
-}
+def delete_old_events(service, calendar_id):
+    """Deleta TODOS os eventos com [ROTINA] na descrição, com paginação completa."""
+    print("Limpando eventos de rotina antigos...")
+    page_token = None
+    deleted = 0
+    while True:
+        existing = service.events().list(
+            calendarId=calendar_id,
+            q='[ROTINA]',
+            maxResults=2500,
+            pageToken=page_token
+        ).execute()
+        for event in existing.get('items', []):
+            desc = event.get('description', '')
+            if '[ROTINA]' in desc:
+                try:
+                    service.events().delete(calendarId=calendar_id, eventId=event['id']).execute()
+                    deleted += 1
+                except Exception as e:
+                    print(f"  ⚠️ Erro ao deletar {event['id']}: {e}")
+        page_token = existing.get('nextPageToken')
+        if not page_token:
+            break
+    print(f"  {deleted} eventos antigos removidos")
+    return deleted
 
 def day_to_rrule(day_codes):
     byday = ','.join(day_codes)
@@ -70,30 +96,21 @@ def get_color(block_type):
 
 def create_events(service, routine):
     calendar_id = 'primary'
-
-    # First, delete existing routine events (tagged with [ROTINA] in description)
-    print("Limpando eventos de rotina antigos...")
-    existing = service.events().list(
-        calendarId=calendar_id,
-        q='[ROTINA]',
-        maxResults=500
-    ).execute()
-    deleted = 0
-    for event in existing.get('items', []):
-        desc = event.get('description', '')
-        if '[ROTINA]' in desc:
-            service.events().delete(calendarId=calendar_id, eventId=event['id']).execute()
-            deleted += 1
-    print(f"  {deleted} eventos antigos removidos")
-
     created = 0
-    for period_key in ['weekdays', 'saturday', 'sunday']:
-        period = routine[period_key]
-        label = period['label']
-        days = period['days']
+
+    for period_key, period in routine.items():
+        if period_key in ('name', 'description'):
+            continue
+
+        label = period.get('label', period_key)
+        days = period.get('days', [])
+        blocks = period.get('blocks', [])
+        if not days or not blocks:
+            continue
+
         rrule = day_to_rrule(days)
 
-        for block in period['blocks']:
+        for block in blocks:
             name = block['name']
             start_t = block['start']
             end_t = block['end']
@@ -103,8 +120,10 @@ def create_events(service, routine):
             icon = TYPE_ICONS.get(block_type, '')
 
             now = datetime.now()
-            start_dt = datetime(now.year, now.month, now.day, int(start_t.split(':')[0]), int(start_t.split(':')[1]))
-            end_dt = datetime(now.year, now.month, now.day, int(end_t.split(':')[0]), int(end_t.split(':')[1]))
+            start_dt = datetime(now.year, now.month, now.day,
+                                int(start_t.split(':')[0]), int(start_t.split(':')[1]))
+            end_dt = datetime(now.year, now.month, now.day,
+                              int(end_t.split(':')[0]), int(end_t.split(':')[1]))
 
             if end_dt <= start_dt:
                 end_dt += timedelta(days=1)
@@ -155,6 +174,8 @@ def main():
 
     print("=== Google Calendar — Sync Rotina ===\n")
     service = get_service()
+    delete_old_events(service, 'primary')
+    print()
     create_events(service, routine)
 
 if __name__ == '__main__':

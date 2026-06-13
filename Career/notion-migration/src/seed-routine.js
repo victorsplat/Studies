@@ -37,10 +37,15 @@ async function seedBlocks() {
   const refDates = { 'MO': '2026-01-05', 'TU': '2026-01-06', 'WE': '2026-01-07', 'TH': '2026-01-08', 'FR': '2026-01-09', 'SA': '2026-01-10', 'SU': '2026-01-11' }
 
   let created = 0
-  for (const periodKey of ['weekdays', 'saturday', 'sunday']) {
+  for (const periodKey in routine) {
+    if (periodKey === 'name' || periodKey === 'description') continue
+
     const period = routine[periodKey]
-    for (const block of period.blocks) {
-      for (const dayCode of period.days) {
+    const blocks = period.blocks || []
+    const days = period.days || []
+
+    for (const block of blocks) {
+      for (const dayCode of days) {
         const dayName = dayMap[dayCode]
         const key = `${block.name}|${dayName}`
 
